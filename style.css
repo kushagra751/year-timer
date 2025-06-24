@@ -1,0 +1,90 @@
+:root {
+  --bg: #0f0f0f;
+  --text: #00ffcc;
+  --circle-bg: #333;
+  --circle-fg: #00ffcc;
+}
+
+body.light {
+  --bg: #fdfdfd;
+  --text: #111;
+  --circle-bg: #ccc;
+  --circle-fg: #222;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: background 0.3s, color 0.3s;
+}
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+p {
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--text);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.progress-ring {
+  position: relative;
+  display: inline-block;
+}
+
+svg {
+  transform: rotate(-90deg);
+}
+
+circle {
+  fill: none;
+  stroke-linecap: round;
+}
+
+circle:first-child {
+  stroke: var(--circle-bg);
+}
+
+#progress {
+  stroke: var(--circle-fg);
+  stroke-dasharray: 565.48; /* 2 * π * r = 2 * π * 90 */
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+.time-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
