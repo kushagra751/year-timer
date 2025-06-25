@@ -1,69 +1,81 @@
 :root {
-  --bg: #0f0f0f;
-  --text: #00ffcc;
+  --bg: #0e0e11;
+  --text: #f0f0f0;
+  --accent: #00ffc3;
   --circle-bg: #333;
-  --circle-fg: #00ffcc;
-}
-
-body.light {
-  --bg: #fdfdfd;
-  --text: #111;
-  --circle-bg: #ccc;
-  --circle-fg: #222;
+  --circle-fg: #00ffc3;
+  --glass: rgba(255, 255, 255, 0.05);
+  --shadow: rgba(0, 0, 0, 0.3);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
-  color: var(--text);
   font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  padding: 2rem;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  transition: background 0.3s, color 0.3s;
+  z-index: 1;
+  position: relative;
 }
 
-.container {
+.timers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card {
+  background: var(--glass);
+  border-radius: 20px;
+  padding: 4rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px var(--shadow);
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin: 0;
 }
 
 p {
-  font-size: 1.2rem;
-  opacity: 0.7;
-}
-
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--text);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background: var(--text);
-  color: var(--bg);
+  margin: 0.4rem 0;
 }
 
 .progress-ring {
   position: relative;
-  display: inline-block;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
 }
 
 svg {
   transform: rotate(-90deg);
+  width: 300px;
+  height: 300px;
 }
 
 circle {
@@ -75,14 +87,15 @@ circle:first-child {
   stroke: var(--circle-bg);
 }
 
-#progress {
+#progress-left, #progress-passed {
   stroke: var(--circle-fg);
-  stroke-dasharray: 565.48; /* 2 * π * r = 2 * π * 90 */
-  stroke-dashoffset: 0;
+  stroke-dasharray: 942.48;
+  stroke-dashoffset: 942.48;
   transition: stroke-dashoffset 0.5s ease;
+  filter: drop-shadow(0 0 8px var(--accent));
 }
 
-.time-display {
+.center-text {
   position: absolute;
   top: 50%;
   left: 50%;
