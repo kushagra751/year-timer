@@ -18,6 +18,18 @@ body {
   height: 100vh;
 }
 
+/* Console Messages Styling */
+#console-messages {
+  font-family: 'Courier New', monospace;
+  color: #00ffc3;
+  text-align: left;
+  max-width: 600px;
+  padding: 1rem;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  margin: 0 auto;
+}
+
 /* Loading Screen */
 #loading-screen {
   position: fixed;
