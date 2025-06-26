@@ -1,103 +1,200 @@
-:root {
-  --bg: #0e0e11;
-  --text: #f0f0f0;
-  --accent: #00ffc3;
-  --circle-bg: #333;
-  --circle-fg: #00ffc3;
-  --glass: rgba(255, 255, 255, 0.05);
-  --shadow: rgba(0, 0, 0, 0.3);
-}
+/* style.css - White Line UI on Black Background with Loading and Iron Man Boot Animation */
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
+  font-family: 'Orbitron', sans-serif;
+  background: #000;
+  color: #fff;
   overflow: hidden;
+}
+
+#bgCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
   height: 100vh;
 }
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.container {
-  padding: 2rem;
+/* Loading Screen */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
   height: 100vh;
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  z-index: 1;
+  z-index: 999;
+}
+
+#loading-bar {
+  width: 60%;
+  height: 8px;
+  border: 2px solid #fff;
   position: relative;
+  margin-top: 1rem;
 }
 
-.timers {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
+#loading-progress {
+  height: 100%;
+  width: 0%;
+  background: #fff;
+  transition: width 0.05s linear;
 }
 
-.card {
-  background: var(--glass);
-  border-radius: 20px;
-  padding: 4rem;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 10px 40px var(--shadow);
+#loading-text {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+/* HUD Main Content */
+.hud {
+  position: relative;
   text-align: center;
-  transition: transform 0.3s ease;
+  padding-top: 4rem;
+  color: #fff;
+  opacity: 0;
+  animation: suitIn 1.2s ease-out forwards;
+  animation-delay: 0.5s;
 }
 
-.card:hover {
-  transform: scale(1.03);
+@keyframes suitIn {
+  0% {
+    transform: scale(0.5) rotateX(90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) rotateX(0deg);
+    opacity: 1;
+  }
 }
 
 h1 {
   font-size: 2.5rem;
-  margin: 0;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 2px solid #fff;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  animation: fadeSlideIn 1s ease-out forwards;
+  opacity: 0;
+  animation-delay: 1s;
 }
 
-p {
-  margin: 0.4rem 0;
+@keyframes fadeSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-.progress-ring {
+.orbital-ring {
   position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid #fff;
   width: 300px;
   height: 300px;
-  margin: 0 auto;
+  margin: 1rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeInZoom 1s ease forwards;
+  animation-delay: 1.4s;
+}
+
+@keyframes fadeInZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.planet {
+  font-size: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: none;
+  color: #fff;
+  z-index: 2;
 }
 
 svg {
-  transform: rotate(-90deg);
-  width: 300px;
-  height: 300px;
-}
-
-circle {
-  fill: none;
-  stroke-linecap: round;
-}
-
-circle:first-child {
-  stroke: var(--circle-bg);
-}
-
-#progress-left, #progress-passed {
-  stroke: var(--circle-fg);
-  stroke-dasharray: 942.48;
-  stroke-dashoffset: 942.48;
-  transition: stroke-dashoffset 0.5s ease;
-  filter: drop-shadow(0 0 8px var(--accent));
-}
-
-.center-text {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+}
+
+#orbit-progress {
+  stroke: #fff;
+  stroke-dasharray: 879.64;
+  stroke-dashoffset: 879.64;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  animation: strokeStart 2s ease-in-out forwards;
+  animation-delay: 2s;
+}
+
+@keyframes strokeStart {
+  from {
+    stroke-dashoffset: 879.64;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: suitIn 1s ease-out forwards;
+  animation-delay: 2.5s;
+}
+
+.card {
+  border: 2px solid #fff;
+  padding: 1rem 2rem;
+  text-align: center;
+  min-width: 160px;
+  background: none;
+  transform: scale(0.95);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card h2 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.card p {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #bbb;
 }
